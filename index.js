@@ -17,7 +17,6 @@ function createClusterClient() {
         }
     });
 
-    cluster.on('error', () => console.log('redis error'));
 
     return cluster;
 }
@@ -28,6 +27,11 @@ const server = net.createServer(async (client) => {
     const resp = new Resp();
     const cluster = createClusterClient();
     const queue = new Queue(cluster);
+
+    cluster.on('error', (err) => {
+        console.log('redis error:', err);
+        client.write(Protocol.encode(err));
+    });
 
     client.pipe(resp);
 
