@@ -1,0 +1,6 @@
+redis:
+    password: REDIS_PASS
+    hosts:
+        __name: REDIS_HOSTS
+        __format: json
+port: LISTEN_PORT
