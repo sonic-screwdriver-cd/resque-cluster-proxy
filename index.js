@@ -15,6 +15,8 @@ const redisOptions = {
 
 if (config.redis && config.redis.password) {
     option.password = config.redis.password;
+} else {
+    option.lazyConnect = true;
 }
 
 function createClusterClient() {
