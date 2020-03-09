@@ -8,15 +8,17 @@ const config = require('config');
 
 const upstreams = config.redis.hosts;
 
-function createClusterClient() {
-    const cluster = new ClusterClient(upstreams, {
-        redisOptions: {
-            password: config.redis.password,
-            clusterRetryStrategy: (times) => 100,
-            showFriendlyErrorStack: true
-        }
-    });
+const redisOptions = {
+    clusterRetryStrategy: (times) => 100,
+    showFriendlyErrorStack: true
+};
 
+if (config.redis && config.redis.password) {
+    option.password: config.redis.password;
+}
+
+function createClusterClient() {
+    const cluster = new ClusterClient(upstreams, { redisOptions });
 
     return cluster;
 }
