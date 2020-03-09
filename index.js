@@ -14,7 +14,7 @@ const redisOptions = {
 };
 
 if (config.redis && config.redis.password) {
-    option.password: config.redis.password;
+    option.password = config.redis.password;
 }
 
 function createClusterClient() {
