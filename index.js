@@ -58,6 +58,7 @@ const server = net.createServer(async (client) => {
     resp.on('data', async (d) => {
         if (d && d[0]) {
             const command = d.shift();
+            console.log(`COMMAND: ${command} \t DATA: ${d}`)
             queue.enqueue(new Job(client, command, d));
         }
     });
