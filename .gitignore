@@ -62,3 +62,5 @@ typings/
 
 config/local.yaml
 artifacts/
+
+.idea
