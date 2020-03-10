@@ -10,14 +10,10 @@ const upstreams = config.redis.hosts;
 
 const redisOptions = {
     clusterRetryStrategy: (times) => 100,
-    showFriendlyErrorStack: true
+    showFriendlyErrorStack: true,
+    password: config.redis.password
 };
 
-if (config.redis && config.redis.password) {
-    redisOptions.password = config.redis.password;
-} else {
-    redisOptions.lazyConnect = true;
-}
 
 function createClusterClient() {
     const cluster = new ClusterClient(upstreams, { redisOptions });
