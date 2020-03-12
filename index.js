@@ -48,7 +48,10 @@ const server = net.createServer(async (client) => {
         client.end();
         cluster.quit();
     });
-
+    
+    client.on('connect', () -> {
+        console.log('SERVER EVNET: CONNECTING');
+    });
 
     resp.on('error', (err) => {
         console.log(err);
@@ -59,9 +62,6 @@ const server = net.createServer(async (client) => {
     resp.on('data', async (d) => {
         if (d && d[0]) {
             const command = d.shift();
-            if (command === 'auth') {
-              cluster.password = d;
-            }
             console.log(`COMMAND: ${command} \t DATA: ${d}`)
             queue.enqueue(new Job(client, command, d));
         }
