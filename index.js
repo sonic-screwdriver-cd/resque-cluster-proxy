@@ -11,7 +11,8 @@ const upstreams = config.redis.hosts;
 function createClusterClient() {
     const cluster = new ClusterClient(upstreams, {
         redisOptions: {
-            password: config.redis.password,
+            lazyConnect: true,
+            //password: config.redis.password,
             clusterRetryStrategy: (times) => 100,
             showFriendlyErrorStack: true
         }
@@ -58,6 +59,9 @@ const server = net.createServer(async (client) => {
     resp.on('data', async (d) => {
         if (d && d[0]) {
             const command = d.shift();
+            fi (command === 'auth') {
+              cluster.password = d;
+            }
             console.log(`COMMAND: ${command} \t DATA: ${d}`)
             queue.enqueue(new Job(client, command, d));
         }
