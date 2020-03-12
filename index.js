@@ -59,7 +59,7 @@ const server = net.createServer(async (client) => {
     resp.on('data', async (d) => {
         if (d && d[0]) {
             const command = d.shift();
-            fi (command === 'auth') {
+            if (command === 'auth') {
               cluster.password = d;
             }
             console.log(`COMMAND: ${command} \t DATA: ${d}`)
