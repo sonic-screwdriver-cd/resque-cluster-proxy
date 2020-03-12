@@ -49,7 +49,7 @@ const server = net.createServer(async (client) => {
         cluster.quit();
     });
     
-    client.on('connect', () -> {
+    client.on('connect', () => {
         console.log('SERVER EVNET: CONNECTING');
     });
 
