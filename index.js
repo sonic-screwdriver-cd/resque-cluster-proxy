@@ -11,7 +11,7 @@ const upstreams = config.redis.hosts;
 function createClusterClient() {
     const cluster = new ClusterClient(upstreams, {
         redisOptions: {
-            //password: config.redis.password,
+            password: config.redis.password,
             clusterRetryStrategy: (times) => 100,
             showFriendlyErrorStack: true
         }
