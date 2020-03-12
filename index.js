@@ -13,7 +13,8 @@ function createClusterClient() {
         redisOptions: {
             //password: config.redis.password,
             clusterRetryStrategy: (times) => 100,
-            showFriendlyErrorStack: true
+            showFriendlyErrorStack: true,
+            lazyConnect: true
         }
     });
 
