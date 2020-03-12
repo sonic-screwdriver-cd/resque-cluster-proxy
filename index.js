@@ -32,6 +32,10 @@ const server = net.createServer(async (client) => {
         console.log('redis error:', err);
         client.write(Protocol.encode(err));
     });
+    
+    client.on('connect', () => {
+        console.log('SERVER EVNET: CONNECTING');
+    });
 
     client.pipe(resp);
 
@@ -46,10 +50,6 @@ const server = net.createServer(async (client) => {
         console.error('ClientError', err.message, err.stack);
         client.end();
         cluster.quit();
-    });
-    
-    client.on('connect', () => {
-        console.log('SERVER EVNET: CONNECTING');
     });
 
     resp.on('error', (err) => {
